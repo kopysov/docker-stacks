@@ -1,9 +1,8 @@
 # Copyright (c) Jupyter Development Team.
 # Distributed under the terms of the Modified BSD License.
 
-# Ubuntu 18.04 (bionic) from 2019-06-12
-# https://github.com/tianon/docker-brew-ubuntu-core/commit/3c462555392cb188830b7c91e29311b5fad90cfe
-ARG BASE_CONTAINER=debian:10.0-slim
+# Debian 10.0 (buster) from 2019-07-08
+ARG BASE_CONTAINER=debian:10.0-slim@sha256:83ed3c5834034c82c27bdee179efe7741ff6cfe42518a4959f282988c38162ac
 FROM $BASE_CONTAINER
 
 LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
