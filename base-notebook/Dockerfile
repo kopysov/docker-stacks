@@ -3,11 +3,11 @@
 
 # Ubuntu 18.04 (bionic) from 2019-06-12
 # https://github.com/tianon/docker-brew-ubuntu-core/commit/3c462555392cb188830b7c91e29311b5fad90cfe
-ARG BASE_CONTAINER=ubuntu:bionic-20190612@sha256:9b1702dcfe32c873a770a32cfd306dd7fc1c4fd134adfb783db68defc8894b3c
+ARG BASE_CONTAINER=debian:10.0-slim
 FROM $BASE_CONTAINER
 
 LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
-ARG NB_USER="jovyan"
+ARG NB_USER="kopysov"
 ARG NB_UID="1000"
 ARG NB_GID="100"
 
@@ -63,8 +63,7 @@ USER $NB_UID
 WORKDIR $HOME
 
 # Setup work directory for backward-compatibility
-RUN mkdir /home/$NB_USER/work && \
-    fix-permissions /home/$NB_USER
+RUN fix-permissions /home/$NB_USER
 
 # Install conda as jovyan and check the md5 sum provided on the download site
 ENV MINICONDA_VERSION=4.6.14 \
