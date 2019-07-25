@@ -2,7 +2,7 @@
 # Distributed under the terms of the Modified BSD License.
 
 # Debian 10.0 (buster) from 2019-07-08
-ARG BASE_CONTAINER=debian:10.0-slim@sha256:83ed3c5834034c82c27bdee179efe7741ff6cfe42518a4959f282988c38162ac
+ARG BASE_CONTAINER=debian:10.0-slim
 FROM $BASE_CONTAINER
 
 LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
@@ -76,9 +76,9 @@ RUN cd /tmp && \
     echo "conda ${CONDA_VERSION}" >> $CONDA_DIR/conda-meta/pinned && \
     $CONDA_DIR/bin/conda config --system --prepend channels conda-forge && \
     $CONDA_DIR/bin/conda config --system --set auto_update_conda false && \
-    $CONDA_DIR/bin/conda config --system --set show_channel_urls true && \
-    $CONDA_DIR/bin/conda install --quiet --yes conda && \
-    $CONDA_DIR/bin/conda update --all --quiet --yes && \
+    $CONDA_DIR/bin/conda config --system --set show_channel_urls true
+
+RUN $CONDA_DIR/bin/conda update --all --quiet --yes && \
     conda list python | grep '^python ' | tr -s ' ' | cut -d '.' -f 1,2 | sed 's/$/.*/' >> $CONDA_DIR/conda-meta/pinned && \
     conda clean --all -f -y && \
     rm -rf /home/$NB_USER/.cache/yarn && \
